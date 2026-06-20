@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Parina Bhardwaj</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0e0e0e;--text:#f0f0f0;--text-muted:#888;--text-subtle:#aaa;
+  --card-bg:#1a1a1a;--card-border:#2a2a2a;
+  --hero-bg:#f0ece4;--hero-text:#1a1a1a;--hero-muted:#555;
+  --btn-dark-bg:#1a1a1a;--btn-dark-text:#f0ece4;
+  --btn-outline-text:#1a1a1a;--btn-outline-border:#1a1a1a;
+  --avatar-bg:#1e1e2e;--avatar-border:#2e2e4e;
+  --skill-group-bg:#111;--skill-group-border:#222;--sg-tag-bg:#1e1e1e;--sg-tag-border:#2e2e2e;--sg-tag-text:#bbb;
+  --proj-item-bg:#111;--proj-item-border:#222;
+  --os-bg:#1a1a1a;--os-border:#2a2a2a;
+  --skills-bg:#1a1a1a;--skills-border:#3d3428;--skills-accent:#8b6914;
+  --toggle-bg:#1a1a1a;--toggle-border:#2a2a2a;--toggle-icon:#f0ece4;
+}
+body.light{
+  --bg:#e8dfd0;--text:#3d2914;--text-muted:#7a5c3a;--text-subtle:#6b5340;
+  --card-bg:#f5efe6;--card-border:#d4c4a8;
+  --hero-bg:#f0e6d6;--hero-text:#3d2914;--hero-muted:#7a5c3a;
+  --btn-dark-bg:#5c4033;--btn-dark-text:#f5efe6;
+  --btn-outline-text:#5c4033;--btn-outline-border:#5c4033;
+  --avatar-bg:#ede4d4;--avatar-border:#c9b896;
+  --skill-group-bg:#faf6f0;--skill-group-border:#c9b896;--sg-tag-bg:#ede4d4;--sg-tag-border:#b8956a;--sg-tag-text:#5c4033;
+  --proj-item-bg:#faf6f0;--proj-item-border:#d4c4a8;
+  --os-bg:#ede4d4;--os-border:#d4c4a8;
+  --skills-bg:#f0e6d6;--skills-border:#8b6914;--skills-accent:#8b6914;
+  --toggle-bg:#f5efe6;--toggle-border:#c9b896;--toggle-icon:#5c4033;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem;transition:background 0.3s,color 0.3s}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;max-width:900px;margin:0 auto}
+
+/* THEME TOGGLE */
+.theme-toggle{position:fixed;top:1.25rem;right:1.25rem;z-index:100;width:44px;height:44px;border-radius:50%;background:var(--toggle-bg);border:1.5px solid var(--toggle-border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--toggle-icon);transition:all 0.3s;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.theme-toggle:hover{transform:scale(1.08)}
+.theme-toggle svg{width:20px;height:20px}
+.theme-toggle .icon-sun{display:none}
+body.light .theme-toggle .icon-moon{display:none}
+body.light .theme-toggle .icon-sun{display:block}
+
+.card{background:var(--card-bg);border-radius:20px;padding:1.5rem;border:1px solid var(--card-border);overflow:hidden;position:relative;transition:background 0.3s,border-color 0.3s,color 0.3s}
+.card.light{background:#f0ece4;color:#1a1a1a;border-color:#e0dbd0}
+body.light .card.light{background:#ede4d4;color:#3d2914;border-color:#c9b896}
+.card.cream{background:#f7f3ec;color:#1a1a1a;border-color:#e8e2d8}
+.card.green{background:#1a2e1a;border-color:#2a4a2a}
+.card.orange{background:#2e1e0e;border-color:#4a2e0e}
+.card.blue-dark{background:#0e1a2e;border-color:#1a2a4a}
+
+/* HERO CARD */
+.hero-card{grid-column:span 8;grid-row:span 2;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;background:var(--hero-bg);color:var(--hero-text);border-color:var(--card-border)}
+.hello-tag{font-size:0.75rem;font-weight:500;color:var(--hero-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1;color:var(--hero-text);margin-bottom:0.4rem}
+.hero-role{font-size:1rem;color:var(--hero-muted);font-weight:400;margin-bottom:1rem}
+.hero-pun{font-size:0.85rem;color:var(--text-muted);font-style:italic;margin-bottom:1.25rem}
+.hero-btns{display:flex;gap:0.6rem;flex-wrap:wrap}
+.btn-dark{padding:0.5rem 1.2rem;background:var(--btn-dark-bg);color:var(--btn-dark-text);border-radius:999px;font-size:0.8rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity 0.2s,background 0.3s,color 0.3s}
+.btn-dark:hover{opacity:0.8}
+.btn-outline{padding:0.5rem 1.2rem;background:transparent;color:var(--btn-outline-text);border:1.5px solid var(--btn-outline-border);border-radius:999px;font-size:0.8rem;font-weight:500;text-decoration:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s}
+.btn-outline:hover{background:var(--btn-dark-bg);color:var(--btn-dark-text)}
+
+/* AVATAR CARD */
+.avatar-card{grid-column:span 4;grid-row:span 2;min-height:220px;display:flex;align-items:center;justify-content:center;background:var(--avatar-bg);border-color:var(--avatar-border);overflow:hidden;position:relative;padding:0.75rem}
+.avatar-img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:16px}
+
+/* STAT CARDS */
+.stat-card{grid-column:span 3;display:flex;flex-direction:column;justify-content:center;gap:0.2rem;padding:1.25rem}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1}
+.stat-label{font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em}
+.card.light .stat-label{color:#888}
+body.light .card.light .stat-label{color:#7a5c3a}
+
+/* OPEN SOURCE CARD — subdued */
+.os-card{grid-column:span 5;display:flex;flex-direction:column;gap:0.75rem;background:var(--os-bg);border-color:var(--os-border);opacity:0.85}
+.os-card .section-head{font-size:0.95rem;font-weight:600}
+.os-card .os-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.5}
+.card-eyebrow{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);font-weight:500}
+.card.light .card-eyebrow{color:#888}
+body.light .card.light .card-eyebrow{color:#7a5c3a}
+.os-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700}
+.badge-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.25rem}
+.badge{font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:999px;font-weight:500;opacity:0.9}
+.badge.green{background:#1f3d1f;color:#7dd87d;border:1px solid #2d5a2d}
+body.light .badge.green{background:#e8f0e8;color:#3d5c3d;border-color:#a8c4a8}
+.badge.amber{background:#3d2d0e;color:#f5c842;border:1px solid #5a3d0e}
+body.light .badge.amber{background:#f5efe0;color:#8b6914;border-color:#c9b896}
+.badge.blue{background:#0e1f3d;color:#7db8f5;border:1px solid #0e2d5a}
+body.light .badge.blue{background:#e8eef5;color:#4a6a8b;border-color:#a8b8c9}
+
+/* PUNS / ABOUT CARD */
+.about-card{grid-column:span 7;display:flex;flex-direction:column;gap:0.5rem}
+.pun-text{font-size:0.9rem;line-height:1.7;color:var(--text-subtle)}
+.pun-text .highlight{color:var(--text);font-weight:500}
+.card.light .pun-text{color:#555}
+.card.light .pun-text .highlight{color:#1a1a1a}
+body.light .card.light .pun-text{color:#6b5340}
+body.light .card.light .pun-text .highlight{color:#3d2914}
+
+/* SKILLS CARD — featured */
+.skills-card{grid-column:span 12;display:flex;flex-direction:column;gap:1.25rem;background:var(--skills-bg);border:2px solid var(--skills-border);box-shadow:0 4px 24px rgba(139,105,20,0.15)}
+body.light .skills-card{box-shadow:0 4px 32px rgba(92,64,51,0.12)}
+.skills-card .card-eyebrow{color:var(--skills-accent);font-weight:600;letter-spacing:0.15em}
+.skills-card .section-head{font-size:1.25rem;font-weight:800}
+.skills-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--skills-accent),transparent);border-radius:20px 20px 0 0}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.85rem}
+.skill-group{background:var(--skill-group-bg);border-radius:14px;padding:1.15rem;border:1px solid var(--skill-group-border);transition:border-color 0.2s,transform 0.2s}
+.skill-group:hover{border-color:var(--skills-accent);transform:translateY(-2px)}
+body.light .skill-group:hover{border-color:#8b6914}
+.sg-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:0.65rem;font-weight:600}
+body.light .sg-title{color:#8b6914}
+.sg-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.sg-tag{font-size:0.72rem;padding:0.25rem 0.55rem;background:var(--sg-tag-bg);border:1px solid var(--sg-tag-border);border-radius:6px;color:var(--sg-tag-text);font-weight:500}
+
+/* PROJECTS CARD */
+.projects-card{grid-column:span 12}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:0.75rem}
+.proj-item{background:var(--proj-item-bg);border:1px solid var(--proj-item-border);border-radius:14px;padding:1rem 1.1rem;transition:border-color 0.2s}
+.proj-item:hover{border-color:#444}
+body.light .proj-item:hover{border-color:#8b6914}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem}
+.proj-name{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--text);line-height:1.3}
+.proj-acc{font-size:0.68rem;background:#1f3d1f;color:#7dd87d;border-radius:999px;padding:0.15rem 0.5rem;white-space:nowrap;border:1px solid #2d5a2d;flex-shrink:0;margin-left:0.4rem}
+.proj-desc{font-size:0.77rem;color:var(--text-muted);line-height:1.5;margin-bottom:0.6rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.3rem}
+.proj-tag{font-size:0.65rem;padding:0.15rem 0.45rem;background:var(--sg-tag-bg);border:1px solid var(--sg-tag-border);border-radius:5px;color:var(--sg-tag-text)}
+
+/* CONTACT CARD */
+.contact-card{grid-column:span 6;display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
+.contact-links{display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem}
+.clink{display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--text-subtle);text-decoration:none;transition:color 0.2s}
+.clink:hover{color:var(--text)}
+.clink svg{width:16px;height:16px;opacity:0.6;flex-shrink:0}
+
+/* FUN CARD */
+.fun-card{grid-column:span 6;display:flex;flex-direction:column;justify-content:space-between}
+.pun-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem}
+.pun-list li{font-size:0.82rem;color:var(--text-subtle);padding-left:1.2rem;position:relative}
+.pun-list li::before{content:'→';position:absolute;left:0;color:var(--text-muted);font-size:0.75rem}
+
+.section-head{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.1rem;color:var(--text)}
+.section-sub{font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem}
+.card.light .section-sub{color:#999}
+.card.light .section-head{color:#1a1a1a}
+body.light .card.light .section-head{color:#3d2914}
+body.light .card.light .section-sub{color:#7a5c3a}
+
+/* Animations */
+.card{opacity:0;transform:translateY(16px);animation:fadeUp 0.5s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:0.05s}
+.card:nth-child(2){animation-delay:0.1s}
+.card:nth-child(3){animation-delay:0.15s}
+.card:nth-child(4){animation-delay:0.2s}
+.card:nth-child(5){animation-delay:0.25s}
+.card:nth-child(6){animation-delay:0.3s}
+.card:nth-child(7){animation-delay:0.35s}
+.card:nth-child(8){animation-delay:0.4s}
+.card:nth-child(9){animation-delay:0.45s}
+.card:nth-child(10){animation-delay:0.5s}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<div class="bento">
+
+  <!-- HERO -->
+  <div class="card hero-card">
+    <div>
+      <p class="hello-tag">hey there  it's me</p>
+      <h1 class="hero-name">Parina<br>Bhardwaj</h1>
+      <p class="hero-role">ML Engineer · LLM Builder · Open Source Nerd</p>
+      <p class="hero-pun">I debug code and life choices — both equally unresolved.</p>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-dark">See my work</a>
+      <a href="mailto:parinabhardwaj1206@gmail.com" class="btn-outline">Let's talk</a>
+    </div>
+  </div>
+
+  <!-- AVATAR -->
+  <div class="card avatar-card">
+    <img src="yaya.png" alt="Parina Bhardwaj — avatar illustration" class="avatar-img"/>
+  </div>
+
+  <!-- STAT: CGPA -->
+  <div class="card light stat-card">
+    <div class="stat-num">9.0</div>
+    <div class="stat-label">CGPA · B.Tech CSE</div>
+  </div>
+
+  <!-- STAT: PRs -->
+  <div class="card light stat-card">
+    <div class="stat-num">27+</div>
+    <div class="stat-label">Merged PRs on GitHub</div>
+  </div>
+
+  <!-- STAT: projects -->
+  <div class="card light stat-card">
+    <div class="stat-num">5</div>
+    <div class="stat-label">ML Projects shipped</div>
+  </div>
+
+
+  <!-- OPEN SOURCE -->
+  <div class="card os-card" style="grid-column:span 5">
+    <p class="card-eyebrow">Open Source</p>
+    <p class="section-head">GSSoC 2026 Contributor</p>
+    <p class="os-desc">Contributing to Sanjeevani — an AI accident severity detection pipeline using computer vision. Because some bugs literally save lives.</p>
+    <div class="badge-row">
+      <span class="badge green">Top Contributor</span>
+      <span class="badge amber">Pull Shark 🦈</span>
+      <span class="badge blue">27+ repos</span>
+    </div>
+  </div>
+
+  <!-- ABOUT / PUNS -->
+  <div class="card about-card" style="grid-column:span 7">
+    <p class="card-eyebrow">About me</p>
+    <p class="section-head" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700">ML student. Bangalore resident. Professional over-thinker.</p>
+    <p class="pun-text">I'm a <span class="highlight">B.Tech CSE student at DSCE</span> who builds ML systems by day and questions my life choices by night. I work with <span class="highlight">LLMs, RAG pipelines, and Scikit-learn</span> basically teaching computers to be smarter than me (the bar is low). Currently staying in Bangalore post-exams, looking for internships, hackathons, and decent filter coffee.</p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="card skills-card">
+    <div>
+      <p class="card-eyebrow">Technical Skills</p>
+      <p class="section-head" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700">My toolkit — no screwdriver needed.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="sg-title">ML & Data Science</div>
+        <div class="sg-tags">
+          <span class="sg-tag">NumPy</span><span class="sg-tag">Pandas</span><span class="sg-tag">Scikit-learn</span><span class="sg-tag">Streamlit</span><span class="sg-tag">PCA</span><span class="sg-tag">Feature Eng.</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">AI & LLMs</div>
+        <div class="sg-tags">
+          <span class="sg-tag">OpenAI</span><span class="sg-tag">Cohere</span><span class="sg-tag">Groq</span><span class="sg-tag">RAG</span><span class="sg-tag">Prompt Eng.</span><span class="sg-tag">AI21</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Languages</div>
+        <div class="sg-tags">
+          <span class="sg-tag">Python 🐍</span><span class="sg-tag">C++</span><span class="sg-tag">Java</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Tools & Web</div>
+        <div class="sg-tags">
+          <span class="sg-tag">Git</span><span class="sg-tag">GitHub</span><span class="sg-tag">Folium</span><span class="sg-tag">REST APIs</span><span class="sg-tag">HTML/CSS/JS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="card projects-card">
+    <p class="card-eyebrow">Projects</p>
+    <p class="section-head" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700">Things I built instead of sleeping.</p>
+    <div class="proj-grid">
+      <div class="proj-item">
+        <div class="proj-top">
+          <span class="proj-name">SafeRoute SF</span>
+          <span class="proj-acc">93% acc.</span>
+        </div>
+        <p class="proj-desc">Crime risk prediction on 60k+ SFPD records. Random Forest + geospatial heatmaps. The city never looked so… dangerous.</p>
+        <div class="proj-tags"><span class="proj-tag">Scikit-learn</span><span class="proj-tag">Folium</span><span class="proj-tag">Streamlit</span></div>
+      </div>
+      <div class="proj-item">
+        <div class="proj-top">
+          <span class="proj-name">ResumeReader AI</span>
+          <span class="proj-acc">Multi-LLM</span>
+        </div>
+        <p class="proj-desc">AI-powered resume analyzer with modular multi-LLM pipeline. Roasts your resume so recruiters don't have to.</p>
+        <div class="proj-tags"><span class="proj-tag">OpenAI</span><span class="proj-tag">Cohere</span><span class="proj-tag">AI21</span></div>
+      </div>
+      <div class="proj-item">
+        <div class="proj-top">
+          <span class="proj-name">Wellbeing Predictor</span>
+          <span class="proj-acc">R²=0.65</span>
+        </div>
+        <p class="proj-desc">Predicts student well-being from lifestyle data. Spoiler: sleep more, scroll less. The model confirmed it.</p>
+        <div class="proj-tags"><span class="proj-tag">PCA</span><span class="proj-tag">Random Forest</span><span class="proj-tag">Streamlit</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="card contact-card" style="grid-column:span 6">
+    <div>
+      <p class="card-eyebrow">Contact</p>
+      <p class="section-head" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700">Let's build something cool. 🚀</p>
+      <p style="font-size:0.8rem;color:#888;margin-top:0.3rem">Open to internships, hackathon collabs, and good chai recommendations in Bangalore.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:parinabhardwaj1206@gmail.com" class="clink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        parinabhardwaj1206@gmail.com
+      </a>
+      <a href="https://github.com/parinaB" class="clink" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        github.com/parinaB
+      </a>
+    </div>
+  </div>
+
+  <!-- FUN PUNS CARD -->
+  <div class="card fun-card light" style="grid-column:span 6">
+    <p class="card-eyebrow" style="color:#999">Fun facts / puns</p>
+    <p class="section-head" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#1a1a1a">Running on caffeine & confusion.</p>
+    <ul class="pun-list" style="color:#444">
+      <li style="color:#444">My model accuracy is 93%. My life accuracy is pending.</li>
+      <li style="color:#444">I have a 9.0 CGPA and zero chill.</li>
+      <li style="color:#444">I merged 27 PRs but can't merge my sleep schedule.</li>
+      <li style="color:#444">Currently training — both the model and myself.</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var toggle=document.getElementById('themeToggle');
+  var saved=localStorage.getItem('theme');
+  if(saved==='light')document.body.classList.add('light');
+  toggle.addEventListener('click',function(){
+    document.body.classList.toggle('light');
+    localStorage.setItem('theme',document.body.classList.contains('light')?'light':'dark');
+  });
+})();
+</script>
+</body>
+</html>
